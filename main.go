@@ -33,10 +33,9 @@ func getPathsFromDir(dir string) ([]string, error) {
 		".png":  {},
 		".jpg":  {},
 		".jpeg": {},
-		".avif": {},
-		".webp": {},
 		".gif":  {},
 		".tiff": {},
+		".tif":  {},
 		".bmp":  {},
 	}
 
@@ -70,8 +69,6 @@ func processBatch(imagePaths []string, saveDir string, fileType string) error {
 		".png":  {},
 		".jpg":  {},
 		".jpeg": {},
-		".avif": {},
-		".webp": {},
 		".gif":  {},
 		".tiff": {},
 		".tif":  {},
@@ -132,6 +129,12 @@ func processBatch(imagePaths []string, saveDir string, fileType string) error {
 }
 
 func main() {
+
+	fileType, exists := os.LookupEnv("FILE_TYPE")
+	if !exists {
+		fileType = "png"
+	}
+
 	// imagePaths := []string{"images/Haruka haruka11_sticker.png", "images/Luka luka5_sticker 2.png", "images/Luka luka5_sticker.png", "images/Miku miku1_sticker.png"}
 	imagePaths, err := getPathsFromDir("images")
 	if err != nil {
@@ -139,7 +142,7 @@ func main() {
 		return
 	}
 
-	if err := processBatch(imagePaths, "processed_images", "jpeg"); err != nil {
+	if err := processBatch(imagePaths, "processed_images", fileType); err != nil {
 		fmt.Println("Error processing batch:", err)
 	} else {
 		fmt.Println("Batch processing completed successfully.")
