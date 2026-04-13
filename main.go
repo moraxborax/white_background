@@ -2,14 +2,13 @@ package main
 
 import (
 	"fmt"
+	"github.com/disintegration/imaging"
 	"image"
 	"image/color"
 	"os"
 	"path/filepath"
 	"strings"
 	"sync"
-
-	"github.com/disintegration/imaging"
 )
 
 func processImage(imagePath string) (*image.NRGBA, error) {
